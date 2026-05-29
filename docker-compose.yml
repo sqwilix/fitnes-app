@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:17-alpine
+    container_name: ai_fitness_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgre
+      POSTGRES_DB: ai_fitness_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - fitness_net
+
+  backend:
+    build: ./backend
+    container_name: ai_fitness_backend
+    restart: always
+    ports:
+      - "3001:3001"
+      - "51212:51212"
+    environment:
+      NODE_ENV: development
+      PORT: 3001
+      DB_USER: postgres
+      DB_PASSWORD: postgre
+      DB_NAME: ai_fitness_db
+      DB_HOST: db
+      DB_PORT: 5432
+      DATABASE_URL: "postgresql://postgres:postgre@db:5432/ai_fitness_db?schema=public"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    depends_on:
+      - db
+    networks:
+      - fitness_net
+
+volumes:
+  pgdata:
+
+networks:
+  fitness_net:
+    driver: bridge
