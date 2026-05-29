@@ -2,18 +2,19 @@ import { Request, Response } from "express";
 import { WorkoutService } from "../Services/Workout_Service.js";
 import { prisma } from "../Utils/prisma.js";
 import { CreateWorkoutSchema, UpdateWorkoutSchema } from "../Schemas/Workout_Schema.js";
+import { ControllerMethods } from "../Types/types.js";
 
 export class WorkoutController {
-    static async createWorkout(req: Request, res: Response) {
+    static createWorkout: ControllerMethods = async(req, res, next) => {
         try {
             const allClients = await prisma.clientProfile.findMany({ take: 5 });
             console.log("СПИСОК КЛИЕНТОВ В БАЗЕ:", allClients);
             
-            const trainerId = (req as any).user.userId
+            const {userId} = req.user
             
             const validatedData = CreateWorkoutSchema.parse(req.body)
     
-            const workout = await WorkoutService.createWorkout(trainerId, validatedData)
+            const workout = await WorkoutService.createWorkout(userId, validatedData)
     
             return res.status(201).json({
                 success: true,
@@ -22,32 +23,32 @@ export class WorkoutController {
             })
         }catch(err: any) {
             console.error("DEBUG ERROR:", err)
-            res.status(400).json({
+            return res.status(400).json({
                 success: false,
                 message: err.message || "Ошибка при добавлении тренировоки"
             })
         }
     }
 
-    static async getWorkouts(req: Request, res: Response) {
+    static getWorkouts: ControllerMethods = async(req, res, next) => {
         try {
-            const userId = (req as any).user.userId
+            const {userId} = req.user
 
             const workouts = await WorkoutService.getWorkouts(userId)
 
             return res.status(200).json(workouts)
         }catch(err: any) {
-            res.status(400).json({
+            return res.status(400).json({
                 success: false,
                 message: err.message || "Ошибка при получении тренировок"
             })
         }
     }
 
-    static async updateWorkout(req: Request, res: Response) {
+    static updateWorkout: ControllerMethods = async(req, res, next) => {
         try {
             const {workoutId} = req.params as {workoutId: string}
-            const userId = (req as any).user.userId
+            const {userId} = req.user
 
             const validatedData = UpdateWorkoutSchema.parse(req.body)
 
@@ -63,17 +64,17 @@ export class WorkoutController {
                 workout: updated
             })
         }catch(err: any) {
-            res.status(400).json({
+            return res.status(400).json({
                 success: false,
                 message: err.message || "Ошибка при обновлении тренировки"
             })
         }
     }
 
-    static async deleteWorkout(req: Request, res: Response) {
+    static deleteWorkout: ControllerMethods = async(req, res, next) => {
         try {
             const {workoutId} = req.params as {workoutId: string}
-            const userId = (req as any).user.userId
+            const {userId} = req.user
 
             const deleted = await WorkoutService.deleteWorkout(workoutId, userId)
 
@@ -87,7 +88,7 @@ export class WorkoutController {
                 workout: deleted
             })
         }catch(err: any) {
-            res.status(400).json({
+            return res.status(400).json({
                 success: false,
                 message: err.message || "Ошибка при удалении тренировки"
             })

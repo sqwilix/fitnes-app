@@ -2,13 +2,15 @@ import { Request, Response } from "express";
 import { ExerciseService } from "../Services/Exercise_Service.js";
 import { CreateExerciseSchema, UpdateExerciseSchema } from "../Schemas/Exercise_Schema.js";
 import {z} from "zod";
+import { AuthRequest, ControllerMethods } from "../Types/types.js";
 
 export class ExerciseController {
-    static async createExerciseForWorkout(req: Request, res: Response) {
+    static createExerciseForWorkout: ControllerMethods = async(req, res, next) => {
         try {
             const {workoutId} = req.params as {workoutId: string}
-            const userId = (req as any).user.userId
-            
+
+            const {userId} = req.user
+
             const validatedData = CreateExerciseSchema.parse(req.body)
 
             const exercise = await ExerciseService.createExerciseForWorkout(
@@ -31,11 +33,11 @@ export class ExerciseController {
                 });
             }
             
-            res.status(400).json({ success: false, message: err.message });
+            return res.status(400).json({ success: false, message: err.message });
         }
     }
 
-    static async getExercisesByWorkout(req: Request, res: Response) {
+    static getExercisesByWorkout: ControllerMethods = async(req, res, next) =>  {
         try {
             const {workoutId} = req.params as {workoutId: string}
 
@@ -43,17 +45,17 @@ export class ExerciseController {
 
             return res.status(200).json({exercises})
         }catch(err: any) {
-            res.status(400).json({
+            return res.status(400).json({
                 success: false,
                 message: err.message || "Ошибка при получения упражнений для тренировки"
             })
         }
     }
 
-    static async updateExercise(req: Request, res: Response) {
+    static updateExercise: ControllerMethods = async(req, res, next) => {
         try {
             const {exerciseId} = req.params as {exerciseId: string}
-            const userId = (req as any).user.userId
+            const {userId} = req.user
             
             const validateData = UpdateExerciseSchema.parse(req.body)
 
@@ -72,14 +74,14 @@ export class ExerciseController {
             if (err.code === 'P2025') { 
                 return res.status(404).json({ success: false, message: "Упражнение не найдено или доступ запрещен" });
             }
-            res.status(400).json({ success: false, message: err.message || "Ошибка сервера" });
+            return res.status(400).json({ success: false, message: err.message || "Ошибка сервера" });
         }
     }
 
-    static async deleteExercise(req: Request, res: Response) {
+    static deleteExercise: ControllerMethods = async(req, res, next) => {
         try {
             const {exerciseId} = req.params as {exerciseId: string}
-            const userId = (req as any).user.userId
+            const {userId} = req.user
 
             const deleted = await ExerciseService.deleteExercise(exerciseId, userId)
 
@@ -96,7 +98,7 @@ export class ExerciseController {
             if (err.code === 'P2025') {
                 return res.status(404).json({ success: false, message: "Упражнение не найдено или доступ запрещен" });
             }
-            res.status(400).json({ success: false, message: err.message || "Ошибка сервера" });
+            return res.status(400).json({ success: false, message: err.message || "Ошибка сервера" });
         }
     }
 }
