@@ -1,19 +1,21 @@
 import { Request, Response } from "express";
 import { ExerciseService } from "../Services/Exercise_Service.js";
+import { CreateExerciseSchema, UpdateExerciseSchema } from "../Schemas/Exercise_Schema.js";
+import {z} from "zod";
 
 export class ExerciseController {
     static async createExerciseForWorkout(req: Request, res: Response) {
         try {
             const {workoutId} = req.params as {workoutId: string}
             const userId = (req as any).user.userId
-            const {name, reps, sets, weight} = req.body
+            
+            const validatedData = CreateExerciseSchema.parse(req.body)
 
-            const exercise = await ExerciseService.createExerciseForWorkout(workoutId, userId, {
-                name,
-                reps,
-                sets,
-                weight
-            })
+            const exercise = await ExerciseService.createExerciseForWorkout(
+                workoutId,
+                userId,
+                validatedData
+            )
 
             return res.status(201).json({
                 success: true,
@@ -21,10 +23,15 @@ export class ExerciseController {
                 exercise
             })
         }catch(err: any) {
-            res.status(400).json({
-                success: false,
-                message: err.message || "Ошибка при создании упражнения для тренировки"
-            })
+            if (err instanceof z.ZodError) {
+                return res.status(400).json({ 
+                    success: false, 
+                    message: "Ошибка валидации данных",
+                    details: err
+                });
+            }
+            
+            res.status(400).json({ success: false, message: err.message });
         }
     }
 
@@ -47,9 +54,10 @@ export class ExerciseController {
         try {
             const {exerciseId} = req.params as {exerciseId: string}
             const userId = (req as any).user.userId
-            const updatedData = req.body
+            
+            const validateData = UpdateExerciseSchema.parse(req.body)
 
-            const updated = await ExerciseService.updateExercise(exerciseId, userId, updatedData)
+            const updated = await ExerciseService.updateExercise(exerciseId, userId, validateData)
 
             if(!updated) {
                 throw new Error("Упражнение не найдено")

@@ -122,11 +122,11 @@ model aiGeneration {
 }
 
 model Exercise {
-  id                     String @id @default(uuid())
-  name                   String
-  reps                   String
-  sets                   String
-  weight                 String
-  workoutSessionId       String
-  workoutSession         WorkoutSession @relation(fields: [workoutSessionId], references: [id], onDelete: Cascade)
+  id                String @id @default(uuid())
+  name              String
+  reps              String
+  sets              String
+  weight            String
+  workoutSessionId  String
+  workoutSession    WorkoutSession @relation(fields: [workoutSessionId], references: [id], onDelete: Cascade)
 }

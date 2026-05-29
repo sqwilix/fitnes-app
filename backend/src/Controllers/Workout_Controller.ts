@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { WorkoutService } from "../Services/Workout_Service.js";
 import { prisma } from "../Utils/prisma.js";
+import { CreateWorkoutSchema, UpdateWorkoutSchema } from "../Schemas/Workout_Schema.js";
 
 export class WorkoutController {
     static async createWorkout(req: Request, res: Response) {
@@ -9,9 +10,10 @@ export class WorkoutController {
             console.log("СПИСОК КЛИЕНТОВ В БАЗЕ:", allClients);
             
             const trainerId = (req as any).user.userId
-            const {clientId, date, title} = req.body
+            
+            const validatedData = CreateWorkoutSchema.parse(req.body)
     
-            const workout = await WorkoutService.createWorkout(trainerId, {clientId, date, title})
+            const workout = await WorkoutService.createWorkout(trainerId, validatedData)
     
             return res.status(201).json({
                 success: true,
@@ -47,9 +49,9 @@ export class WorkoutController {
             const {workoutId} = req.params as {workoutId: string}
             const userId = (req as any).user.userId
 
-            const updateData = req.body
+            const validatedData = UpdateWorkoutSchema.parse(req.body)
 
-            const updated = await WorkoutService.updateWorkout(workoutId, userId, updateData)
+            const updated = await WorkoutService.updateWorkout(workoutId, userId, validatedData)
 
             if(!updated) {
                 throw new Error("Тренировка не найдена")

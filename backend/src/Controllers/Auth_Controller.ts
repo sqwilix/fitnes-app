@@ -1,10 +1,14 @@
 import { Request, Response } from "express";
 import { AuthService } from "../Services/Auth_Service.js";
+import { LoginSchema, RegisterSchema } from "../Schemas/Auth_Schema.js";
+import z from "zod";
 
 export class AuthController {
     static async register(req: Request, res: Response): Promise<void> {
         try {
-            const result = await AuthService.register(req.body)
+            const validateData = RegisterSchema.parse(req.body)
+
+            const result = await AuthService.register(validateData)
 
             res.status(201).json({
                 success: true,
@@ -12,16 +16,24 @@ export class AuthController {
                 ...result
             })
         }catch(err: any) {
+            if (err instanceof z.ZodError) {
+                res.status(400).json({
+                    success: false,
+                    message: "Ошибка валидации",
+                });
+            }
             res.status(400).json({
                 success: false,
                 message: err.message || "Ошибка при регистрации"
-            })
+            });
         }
     }
 
     static async login(req: Request, res: Response): Promise<void> {
         try {
-            const result = await AuthService.login(req.body)
+            const validateData = LoginSchema.parse(req.body)
+
+            const result = await AuthService.login(validateData)
 
             res.status(200).json({
                 success: true,
@@ -29,10 +41,16 @@ export class AuthController {
                 ...result
             })
         }catch(err: any) {
+            if (err instanceof z.ZodError) {
+                res.status(400).json({
+                    success: false,
+                    message: "Ошибка валидации",
+                });
+            }
             res.status(400).json({
                 success: false,
                 message: err.message || "Ошибка при входе в аккаунт"
-            })
+            });
         }
     }
 }

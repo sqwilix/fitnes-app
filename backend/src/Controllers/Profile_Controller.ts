@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { ProfileService } from "../Services/Profile_Service.js";
+import { UpdateClientProfile, UpdateTrainerProfile } from "../Schemas/Profile_Schema.js";
 
 export class ProfileController {
     static async getProfile(req: Request, res: Response) {
@@ -25,9 +26,12 @@ export class ProfileController {
         try {
             const userId = (req as any).user.userId
             const role = (req as any).user.role
-            const data = req.body
+            
+            const shema = role === "TRAINER" ? UpdateTrainerProfile : UpdateClientProfile
 
-            const updatedProfile = await ProfileService.updateProfile(userId, role, data)
+            const validatedData = shema.parse(req.body)
+
+            const updatedProfile = await ProfileService.updateProfile(userId, role, validatedData)
             return res.json({success: true, profile: updatedProfile})
         }catch(err: any) {
             res.status(400).json({
