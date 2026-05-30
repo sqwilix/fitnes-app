@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { ProfileService } from "../Services/Profile_Service.js";
 import { UpdateClientProfile, UpdateTrainerProfile } from "../Schemas/Profile_Schema.js";
 import { ControllerMethods } from "../Types/types.js";
+import { logger } from "../Utils/logger.js";
 
 export class ProfileController {
     static getProfile: ControllerMethods = async(req, res, next) => {
@@ -16,6 +17,8 @@ export class ProfileController {
 
             return res.status(200).json(user)
         }catch(err: any) {
+            logger.error("Ошибка при получении профиля:", { userId: req.user?.userId, error: err.message })
+
             return res.status(400).json({
                 success: false,
                 message: err.message || "Ошибка при получении профиля"
@@ -35,6 +38,12 @@ export class ProfileController {
             const updatedProfile = await ProfileService.updateProfile(userId, role, validatedData)
             return res.json({success: true, profile: updatedProfile})
         }catch(err: any) {
+            logger.error("Ошибка при обновлении профиля:", { 
+                userId: req.user?.userId, 
+                role: req.user?.role, 
+                error: err.message 
+            });
+
             return res.status(400).json({
                 success: false,
                 message: err.message || "Ошибка при обновлении профиля"

@@ -3,6 +3,7 @@ import { ExerciseService } from "../Services/Exercise_Service.js";
 import { CreateExerciseSchema, UpdateExerciseSchema } from "../Schemas/Exercise_Schema.js";
 import {z} from "zod";
 import { AuthRequest, ControllerMethods } from "../Types/types.js";
+import { logger } from "../Utils/logger.js";
 
 export class ExerciseController {
     static createExerciseForWorkout: ControllerMethods = async(req, res, next) => {
@@ -25,6 +26,8 @@ export class ExerciseController {
                 exercise
             })
         }catch(err: any) {
+            logger.error("Ошибка при создании упражнения:", { error: err.message, userId: req.user?.userId });
+
             if (err instanceof z.ZodError) {
                 return res.status(400).json({ 
                     success: false, 
@@ -45,6 +48,8 @@ export class ExerciseController {
 
             return res.status(200).json({exercises})
         }catch(err: any) {
+            logger.error("Ошибка при получении упражнений:", { workoutId: req.params.workoutId, error: err.message });
+
             return res.status(400).json({
                 success: false,
                 message: err.message || "Ошибка при получения упражнений для тренировки"
@@ -71,6 +76,8 @@ export class ExerciseController {
                 exercise: updated
             })
         }catch (err: any) {
+            logger.error("Ошибка при обновлении упражнения:", { exerciseId: req.params.exerciseId, error: err.message });
+
             if (err.code === 'P2025') { 
                 return res.status(404).json({ success: false, message: "Упражнение не найдено или доступ запрещен" });
             }
@@ -95,6 +102,8 @@ export class ExerciseController {
                 exercise: deleted
             })
         }catch (err: any) {
+            logger.error("Ошибка при удалении упражнения:", { exerciseId: req.params.exerciseId, error: err.message });
+
             if (err.code === 'P2025') {
                 return res.status(404).json({ success: false, message: "Упражнение не найдено или доступ запрещен" });
             }

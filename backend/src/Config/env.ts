@@ -1,3 +1,5 @@
+import { logger } from "../Utils/logger.js";
+
 export const env = {
     port: Number(process.env.PORT) || 3001,
     
@@ -12,5 +14,5 @@ export const env = {
 };
 
 if (!process.env.JWT_SECRET) {
-    console.warn("⚠️ WARNING: JWT_SECRET is not defined in .env! Using fallback.");
+    logger.warn("⚠️ WARNING: JWT_SECRET is not defined in .env! Using fallback.")
 }

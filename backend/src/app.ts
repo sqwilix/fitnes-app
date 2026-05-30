@@ -1,6 +1,8 @@
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import express from 'express'
+import morgan from 'morgan';
+import { logger } from './Utils/logger.js';
 import authRoute from './Routes/Auth_Route.js'
 import profileRoute from './Routes/Profile_Route.js'
 import workoutRoute from './Routes/Workout_Route.js'
@@ -18,6 +20,9 @@ app.use(cors({
 
 app.use(express.json())
 app.use(cookieParser())
+app.use(morgan('combined', {
+    stream: {write: (message) => logger.info(message.trim())}
+}))
 
 app.get('/health', (req, res) => {
     res.status(200).send('ok')

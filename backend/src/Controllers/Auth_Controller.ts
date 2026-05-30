@@ -3,6 +3,7 @@ import { AuthService } from "../Services/Auth_Service.js";
 import { LoginSchema, RegisterSchema } from "../Schemas/Auth_Schema.js";
 import z from "zod";
 import { ControllerMethods } from "../Types/types.js";
+import { logger } from "../Utils/logger.js";
 
 export class AuthController {
     static register: ControllerMethods = async(req, res, next) =>  {
@@ -17,8 +18,10 @@ export class AuthController {
                 ...result
             })
         }catch(err: any) {
+            logger.error("Ошибка при регистрации:", { error: err.message, body: req.body });
+
             if (err instanceof z.ZodError) {
-                res.status(400).json({
+                return res.status(400).json({
                     success: false,
                     message: "Ошибка валидации",
                 });
@@ -36,14 +39,16 @@ export class AuthController {
 
             const result = await AuthService.login(validateData)
 
-            res.status(200).json({
+            return res.status(200).json({
                 success: true,
                 message: "Пользователь успешно вошел в аккаунт",
                 ...result
             })
         }catch(err: any) {
+            logger.error("Ошибка при входе:", { error: err.message, email: req.body.email });
+
             if (err instanceof z.ZodError) {
-                res.status(400).json({
+                return res.status(400).json({
                     success: false,
                     message: "Ошибка валидации",
                 });
