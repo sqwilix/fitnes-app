@@ -14,7 +14,8 @@ export const subscriptionGuard = async (req: AuthRequest, res: Response, next: N
             where: {
                 client: {userId: userId},
                 status: "ACTIVE",
-                endDate: {gte: new Date()}
+                endDate: {gte: new Date()},
+                remainingLesson: {gt: 0}
             }
         })
 

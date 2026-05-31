@@ -7,7 +7,13 @@ export class ProfileService {
             where: {id: userId},
             omit: {password: true},
             include: {
-                clientProfile: true,
+                clientProfile: {
+                    include: {
+                        subscriptions: {
+                            where: {status: "ACTIVE"}
+                        }
+                    }
+                },
                 trainerProfile: true
             }
         })

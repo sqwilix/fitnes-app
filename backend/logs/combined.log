@@ -18,3 +18,178 @@
 {"level":"info","message":"DB Connected via pg pool successfully!","timestamp":"2026-05-30T06:01:01.587Z"}
 {"level":"info","message":"Server running on http://192.168.1.5:3001","timestamp":"2026-05-30T06:01:01.590Z"}
 {"level":"info","message":"Also available on http://localhost:3001","timestamp":"2026-05-30T06:01:01.590Z"}
+{"level":"info","message":"Connecting to db at db:5432","timestamp":"2026-05-31T09:58:19.703Z"}
+{"level":"info","message":"DB Connected via pg pool successfully!","timestamp":"2026-05-31T09:58:19.773Z"}
+{"level":"info","message":"Server running on http://192.168.1.5:3001","timestamp":"2026-05-31T09:58:19.777Z"}
+{"level":"info","message":"Also available on http://localhost:3001","timestamp":"2026-05-31T09:58:19.777Z"}
+{"level":"info","message":"172.18.0.1 - - [31/May/2026:09:59:02 +0000] \"POST /subscription HTTP/1.1\" - - \"-\" \"Thunder Client (https://www.thunderclient.com)\"","timestamp":"2026-05-31T09:59:02.054Z"}
+{"level":"info","message":"172.18.0.1 - - [31/May/2026:09:59:58 +0000] \"POST /auth/register HTTP/1.1\" 201 455 \"-\" \"Thunder Client (https://www.thunderclient.com)\"","timestamp":"2026-05-31T09:59:58.162Z"}
+{"level":"info","message":"172.18.0.1 - - [31/May/2026:10:00:32 +0000] \"POST /subscription HTTP/1.1\" 400 94 \"-\" \"Thunder Client (https://www.thunderclient.com)\"","timestamp":"2026-05-31T10:00:32.833Z"}
+{"level":"info","message":"172.18.0.1 - - [31/May/2026:10:03:12 +0000] \"POST /auth/register HTTP/1.1\" 201 457 \"-\" \"Thunder Client (https://www.thunderclient.com)\"","timestamp":"2026-05-31T10:03:12.030Z"}
+{"level":"info","message":"172.18.0.1 - - [31/May/2026:10:03:30 +0000] \"POST /subscription HTTP/1.1\" 400 94 \"-\" \"Thunder Client (https://www.thunderclient.com)\"","timestamp":"2026-05-31T10:03:30.961Z"}
+{"level":"info","message":"172.18.0.1 - - [31/May/2026:10:05:08 +0000] \"POST /auth/login HTTP/1.1\" 200 453 \"-\" \"Thunder Client (https://www.thunderclient.com)\"","timestamp":"2026-05-31T10:05:08.193Z"}
+{"error":"[\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"email\"\n    ],\n    \"message\": \"Invalid input: expected string, received undefined\"\n  },\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"password\"\n    ],\n    \"message\": \"Invalid input: expected string, received undefined\"\n  }\n]","level":"error","message":"Ошибка при входе:","timestamp":"2026-05-31T10:05:21.789Z"}
+{"level":"info","message":"172.18.0.1 - - [31/May/2026:10:05:21 +0000] \"POST /auth/login HTTP/1.1\" 400 61 \"-\" \"Thunder Client (https://www.thunderclient.com)\"","timestamp":"2026-05-31T10:05:21.791Z"}
+{"level":"info","message":"172.18.0.1 - - [31/May/2026:10:05:29 +0000] \"POST /subscription HTTP/1.1\" 201 414 \"-\" \"Thunder Client (https://www.thunderclient.com)\"","timestamp":"2026-05-31T10:05:29.988Z"}
+{"level":"info","message":"Connecting to db at db:5432","timestamp":"2026-05-31T10:06:53.636Z"}
+{"level":"info","message":"DB Connected via pg pool successfully!","timestamp":"2026-05-31T10:06:53.697Z"}
+{"level":"info","message":"Server running on http://192.168.1.5:3001","timestamp":"2026-05-31T10:06:53.701Z"}
+{"level":"info","message":"Also available on http://localhost:3001","timestamp":"2026-05-31T10:06:53.701Z"}
+{"level":"info","message":"Запуск задачи: обновление статуса подписок","timestamp":"2026-05-31T10:07:00.022Z"}
+{"level":"info","message":"Задача завершена. Просроченых подписок обновлено 0","timestamp":"2026-05-31T10:07:00.475Z"}
+{"level":"info","message":"Запуск задачи: обновление статуса подписок","timestamp":"2026-05-31T10:08:00.025Z"}
+{"level":"info","message":"Задача завершена. Просроченых подписок обновлено 0","timestamp":"2026-05-31T10:08:00.071Z"}
+{"level":"info","message":"Запуск задачи: обновление статуса подписок","timestamp":"2026-05-31T10:09:00.023Z"}
+{"level":"info","message":"Задача завершена. Просроченых подписок обновлено 0","timestamp":"2026-05-31T10:09:00.055Z"}
+{"level":"info","message":"Connecting to db at db:5432","timestamp":"2026-05-31T10:09:42.905Z"}
+{"level":"info","message":"DB Connected via pg pool successfully!","timestamp":"2026-05-31T10:09:42.944Z"}
+{"level":"info","message":"Server running on http://192.168.1.5:3001","timestamp":"2026-05-31T10:09:42.948Z"}
+{"level":"info","message":"Also available on http://localhost:3001","timestamp":"2026-05-31T10:09:42.948Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:10:00.030Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:10:00.400Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:11:00.063Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:11:00.097Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:12:00.029Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:12:00.062Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:13:00.017Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:13:00.040Z"}
+{"level":"info","message":"Connecting to db at db:5432","timestamp":"2026-05-31T10:13:35.976Z"}
+{"level":"info","message":"DB Connected via pg pool successfully!","timestamp":"2026-05-31T10:13:36.015Z"}
+{"level":"info","message":"Server running on http://192.168.1.5:3001","timestamp":"2026-05-31T10:13:36.019Z"}
+{"level":"info","message":"Also available on http://localhost:3001","timestamp":"2026-05-31T10:13:36.019Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:14:00.064Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:14:00.468Z"}
+{"level":"info","message":"172.18.0.1 - - [31/May/2026:10:14:29 +0000] \"POST /auth/login HTTP/1.1\" 200 453 \"-\" \"Thunder Client (https://www.thunderclient.com)\"","timestamp":"2026-05-31T10:14:29.274Z"}
+{"level":"info","message":"172.18.0.1 - - [31/May/2026:10:14:43 +0000] \"GET /user/profile HTTP/1.1\" 200 740 \"-\" \"Thunder Client (https://www.thunderclient.com)\"","timestamp":"2026-05-31T10:14:43.765Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:15:00.027Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:15:00.062Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:16:00.023Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:16:00.071Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:17:00.022Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:17:00.059Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:18:00.028Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:18:00.052Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:19:00.022Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:19:00.051Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:20:00.047Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:20:00.121Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:21:00.022Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:21:00.063Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:22:00.033Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:22:00.054Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:23:00.053Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:23:00.089Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:24:00.014Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:24:00.037Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:25:00.024Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:25:00.052Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:26:00.042Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:26:00.076Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:27:00.012Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:27:00.039Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:28:00.014Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:28:00.052Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:29:00.025Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:29:00.079Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:30:00.032Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:30:00.073Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:31:00.045Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:31:00.096Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:32:00.016Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:32:00.045Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:33:00.060Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:33:00.088Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:34:00.034Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:34:00.071Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:35:00.027Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:35:00.056Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:36:00.027Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:36:00.079Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:37:00.021Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:37:00.058Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:38:00.065Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:38:00.097Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:39:00.030Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:39:00.065Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:40:00.027Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:40:00.051Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:41:00.042Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:41:00.061Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:42:00.041Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:42:00.071Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:43:00.016Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:43:00.049Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:44:00.030Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:44:00.061Z"}
+{"level":"info","message":"Connecting to db at db:5432","timestamp":"2026-05-31T10:44:22.375Z"}
+{"level":"info","message":"DB Connected via pg pool successfully!","timestamp":"2026-05-31T10:44:22.428Z"}
+{"level":"info","message":"Server running on http://192.168.1.5:3001","timestamp":"2026-05-31T10:44:22.432Z"}
+{"level":"info","message":"Also available on http://localhost:3001","timestamp":"2026-05-31T10:44:22.432Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:45:00.023Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:45:00.391Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:46:00.039Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:46:00.081Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:47:00.034Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:47:00.091Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:48:00.138Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:48:00.187Z"}
+{"level":"info","message":"Connecting to db at db:5432","timestamp":"2026-05-31T10:48:10.908Z"}
+{"level":"info","message":"DB Connected via pg pool successfully!","timestamp":"2026-05-31T10:48:10.977Z"}
+{"level":"info","message":"Server running on http://192.168.1.5:3001","timestamp":"2026-05-31T10:48:10.984Z"}
+{"level":"info","message":"Also available on http://localhost:3001","timestamp":"2026-05-31T10:48:10.985Z"}
+{"level":"info","message":"Connecting to db at db:5432","timestamp":"2026-05-31T10:48:18.152Z"}
+{"level":"info","message":"DB Connected via pg pool successfully!","timestamp":"2026-05-31T10:48:18.189Z"}
+{"level":"info","message":"Server running on http://192.168.1.5:3001","timestamp":"2026-05-31T10:48:18.192Z"}
+{"level":"info","message":"Also available on http://localhost:3001","timestamp":"2026-05-31T10:48:18.192Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:49:00.028Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:49:00.315Z"}
+{"level":"info","message":"Connecting to db at db:5432","timestamp":"2026-05-31T10:49:33.788Z"}
+{"level":"info","message":"DB Connected via pg pool successfully!","timestamp":"2026-05-31T10:49:33.835Z"}
+{"level":"info","message":"Server running on http://192.168.1.5:3001","timestamp":"2026-05-31T10:49:33.838Z"}
+{"level":"info","message":"Also available on http://localhost:3001","timestamp":"2026-05-31T10:49:33.839Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:50:00.016Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:50:00.354Z"}
+{"level":"info","message":"Connecting to db at db:5432","timestamp":"2026-05-31T10:50:10.650Z"}
+{"level":"info","message":"DB Connected via pg pool successfully!","timestamp":"2026-05-31T10:50:10.700Z"}
+{"level":"info","message":"Server running on http://192.168.1.5:3001","timestamp":"2026-05-31T10:50:10.703Z"}
+{"level":"info","message":"Also available on http://localhost:3001","timestamp":"2026-05-31T10:50:10.704Z"}
+{"level":"info","message":"Connecting to db at db:5432","timestamp":"2026-05-31T10:50:16.176Z"}
+{"level":"info","message":"DB Connected via pg pool successfully!","timestamp":"2026-05-31T10:50:16.224Z"}
+{"level":"info","message":"Server running on http://192.168.1.5:3001","timestamp":"2026-05-31T10:50:16.227Z"}
+{"level":"info","message":"Also available on http://localhost:3001","timestamp":"2026-05-31T10:50:16.228Z"}
+{"level":"info","message":"Connecting to db at db:5432","timestamp":"2026-05-31T10:50:43.504Z"}
+{"level":"info","message":"DB Connected via pg pool successfully!","timestamp":"2026-05-31T10:50:43.545Z"}
+{"level":"info","message":"Server running on http://192.168.1.5:3001","timestamp":"2026-05-31T10:50:43.549Z"}
+{"level":"info","message":"Also available on http://localhost:3001","timestamp":"2026-05-31T10:50:43.549Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:51:00.031Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:51:00.389Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:52:00.044Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:52:00.078Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:53:00.041Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:53:00.096Z"}
+{"level":"info","message":"Connecting to db at db:5432","timestamp":"2026-05-31T10:53:33.398Z"}
+{"level":"info","message":"DB Connected via pg pool successfully!","timestamp":"2026-05-31T10:53:33.483Z"}
+{"level":"info","message":"Server running on http://192.168.1.5:3001","timestamp":"2026-05-31T10:53:33.487Z"}
+{"level":"info","message":"Also available on http://localhost:3001","timestamp":"2026-05-31T10:53:33.487Z"}
+{"level":"info","message":"172.18.0.1 - - [31/May/2026:10:53:49 +0000] \"POST /workout/c30c378b-487b-4604-a721-56ad6d7950ef/completed HTTP/1.1\" 404 194 \"-\" \"Thunder Client (https://www.thunderclient.com)\"","timestamp":"2026-05-31T10:53:49.311Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:54:00.017Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:54:00.075Z"}
+{"level":"info","message":"Connecting to db at db:5432","timestamp":"2026-05-31T10:54:07.969Z"}
+{"level":"info","message":"DB Connected via pg pool successfully!","timestamp":"2026-05-31T10:54:08.012Z"}
+{"level":"info","message":"Server running on http://192.168.1.5:3001","timestamp":"2026-05-31T10:54:08.016Z"}
+{"level":"info","message":"Also available on http://localhost:3001","timestamp":"2026-05-31T10:54:08.017Z"}
+{"level":"info","message":"172.18.0.1 - - [31/May/2026:10:54:09 +0000] \"PATCH /workout/c30c378b-487b-4604-a721-56ad6d7950ef/completed HTTP/1.1\" 400 94 \"-\" \"Thunder Client (https://www.thunderclient.com)\"","timestamp":"2026-05-31T10:54:09.159Z"}
+{"level":"info","message":"172.18.0.1 - - [31/May/2026:10:54:26 +0000] \"PATCH /user/profile HTTP/1.1\" 404 153 \"-\" \"Thunder Client (https://www.thunderclient.com)\"","timestamp":"2026-05-31T10:54:26.533Z"}
+{"level":"info","message":"172.18.0.1 - - [31/May/2026:10:54:27 +0000] \"GET /user/profile HTTP/1.1\" 200 740 \"-\" \"Thunder Client (https://www.thunderclient.com)\"","timestamp":"2026-05-31T10:54:27.400Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:55:00.027Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:55:00.087Z"}
+{"email":"trainer1@test.com","error":"Неверный логин или пароль","level":"error","message":"Ошибка при входе:","timestamp":"2026-05-31T10:55:02.139Z"}
+{"level":"info","message":"172.18.0.1 - - [31/May/2026:10:55:02 +0000] \"POST /auth/login HTTP/1.1\" 400 77 \"-\" \"Thunder Client (https://www.thunderclient.com)\"","timestamp":"2026-05-31T10:55:02.141Z"}
+{"email":"trainer@test.com","error":"Неверный логин или пароль","level":"error","message":"Ошибка при входе:","timestamp":"2026-05-31T10:55:07.816Z"}
+{"level":"info","message":"172.18.0.1 - - [31/May/2026:10:55:07 +0000] \"POST /auth/login HTTP/1.1\" 400 77 \"-\" \"Thunder Client (https://www.thunderclient.com)\"","timestamp":"2026-05-31T10:55:07.818Z"}
+{"level":"info","message":"172.18.0.1 - - [31/May/2026:10:55:26 +0000] \"POST /auth/login HTTP/1.1\" 200 453 \"-\" \"Thunder Client (https://www.thunderclient.com)\"","timestamp":"2026-05-31T10:55:26.338Z"}
+{"level":"info","message":"172.18.0.1 - - [31/May/2026:10:55:41 +0000] \"PATCH /workout/c30c378b-487b-4604-a721-56ad6d7950ef/completed HTTP/1.1\" 400 94 \"-\" \"Thunder Client (https://www.thunderclient.com)\"","timestamp":"2026-05-31T10:55:41.424Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:56:00.021Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:56:00.042Z"}
+{"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:57:00.014Z"}
+{"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:57:00.044Z"}

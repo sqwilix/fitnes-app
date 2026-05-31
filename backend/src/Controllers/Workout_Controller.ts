@@ -93,4 +93,15 @@ export class WorkoutController {
             });
         }
     }
+
+    static completedWorkout: ControllerMethods = async (req, res, next) => {
+        try {
+            const {workoutId} = req.params as {workoutId: string}
+            const result = await WorkoutService.completedWorkout(workoutId)
+
+            return res.status(200).json({success: true, message: "Тренировка завершена", result})
+        }catch(err: any) {
+            return res.status(400).json({ success: false, message: err.message });
+        }
+    }
 }

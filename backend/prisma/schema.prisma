@@ -67,7 +67,7 @@ model ClientProfile {
   trainer         TrainerProfile?  @relation(fields: [trainerId], references: [id], onDelete: SetNull)
   weight          Int?
   height          Int?
-goal              String?
+  goal            String?
 
   subscriptions   Subscription[]
   sessions        WorkoutSession[]

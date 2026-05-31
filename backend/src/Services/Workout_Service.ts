@@ -8,21 +8,41 @@ export class WorkoutService {
             where: {userId: userId}
         })
 
-        console.log("Результат поиска профиля:", trainerProfile)
-
         if (!trainerProfile) {
             throw new Error("Действие разрешено только для тренеров");
         }
 
-        return await prisma.workoutSession.create({
-            data: {
-                title: data.title || "Новая тренировка",
-                date: new Date(data.date),
-                clientId: data.clientId,
-                isCompleted: false,
-                trainerId: trainerProfile.id
-            },
-            include: {client: true, trainer: true}
+        return await prisma.$transaction(async (tx) => {
+            const subscription = await tx.subscription.findFirst({
+                where: {
+                    clientId: data.clientId,
+                    status: "ACTIVE",
+                    endDate: {gte: new Date()},
+                    remainingLesson: {gt: 0}
+                }
+            })
+
+            if(!subscription) {
+                throw new Error("У клиента нет активного абонимента или закончились занятия")
+            }
+
+            const workout = await tx.workoutSession.create({
+                data: {
+                    title: data.title || "Новая тернировка",
+                    date: new Date(data.date),
+                    clientId: data.clientId,
+                    isCompleted: false,
+                    trainerId: trainerProfile.id
+                },
+                include: {trainer: true, client: true}
+            })
+
+            await tx.subscription.update({
+                where: {id: subscription.id},
+                data: {remainingLesson: {decrement: 1}}
+            })
+
+            return workout
         })
     }
 
@@ -74,6 +94,47 @@ export class WorkoutService {
                 id: workoutId,
                 trainerId: trainerProfile?.id
             }
+        })
+    }
+
+    static async completedWorkout(workoutId: string) {
+        return await prisma.$transaction(async (tx) => {
+            const workout = await tx.workoutSession.findUnique({
+                where: {id: workoutId},
+                include: {client: {include: {subscriptions: {where: {status: "ACTIVE"}}}}}
+            })
+
+            if(!workout) {
+                throw new Error("Тренировка не найдена")
+            }
+
+            if(workout.isCompleted === true) {
+                throw new Error("Тренировка уже завершена")
+            }
+
+            const activeSub = workout.client.subscriptions[0]
+            if(!activeSub) {
+                throw new Error("У клиента нет активного абонемента")
+            }
+
+            const updateSub = await tx.subscription.update({
+                where: {id: activeSub.id},
+                data: {remainingLesson: {decrement: 1}}
+            })
+
+            const updateWorkout = await tx.workoutSession.update({
+                where: {id: workoutId},
+                data: {isCompleted: true}
+            })
+
+            if(updateSub.remainingLesson - 1 <= 0) {
+                await tx.subscription.update({
+                    where: {id: activeSub.id},
+                    data: {status: "EXPIRED"}
+                })
+            }
+
+            return updateWorkout
         })
     }
 }

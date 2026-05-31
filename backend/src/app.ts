@@ -7,9 +7,13 @@ import authRoute from './Routes/Auth_Route.js'
 import profileRoute from './Routes/Profile_Route.js'
 import workoutRoute from './Routes/Workout_Route.js'
 import exerciseRoute from './Routes/Exercise_Route.js'
+import subscriptionRoute from './Routes/Subscription_Route.js'
+import { initCronJobs } from './Utils/cron.js';
 
 
 const app = express()
+
+initCronJobs()
 
 app.use(cors({
     origin: ['http://localhost:5173', 'http://127.0.0.1:5173'],
@@ -32,5 +36,6 @@ app.use("/auth", authRoute)
 app.use("/user", profileRoute)
 app.use("/workout", workoutRoute)
 app.use("/workout", exerciseRoute)
+app.use("/subscription", subscriptionRoute)
 
 export default app

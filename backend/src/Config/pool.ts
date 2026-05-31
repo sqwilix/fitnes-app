@@ -1,5 +1,6 @@
 import pg from 'pg';
 import { logger } from '../Utils/logger.js';
+
 const { Pool } = pg;
 
 export const pool = new Pool({
@@ -10,4 +11,4 @@ export const pool = new Pool({
     database: process.env.DB_NAME
 });
 
-logger.info(`Connecting to db at ${pool.options.host}:${pool.options.port}`)
+logger.info(`Connecting to db at ${pool.options.host}:${pool.options.port}`);
