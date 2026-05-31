@@ -22,27 +22,35 @@ services:
     restart: always
     ports:
       - "3001:3001"
-      - "51212:51212"
     environment:
       NODE_ENV: development
-      PORT: 3001
-      DB_USER: postgres
-      DB_PASSWORD: postgre
-      DB_NAME: ai_fitness_db
-      DB_HOST: db
-      DB_PORT: 5432
       DATABASE_URL: "postgresql://postgres:postgre@db:5432/ai_fitness_db?schema=public"
+      GROQ_API_KEY: ${GROQ_API_KEY}
     volumes:
-      - ./backend:/app
+      - ./backend:/app             
       - /app/node_modules
     depends_on:
       - db
     networks:
       - fitness_net
 
-volumes:
-  pgdata:
+  frontend:
+    build: ./frontend
+    container_name: ai_fitness_frontend
+    restart: always
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_API_URL: http://localhost:3001
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    networks:
+      - fitness_net
 
 networks:
   fitness_net:
     driver: bridge
+
+volumes:
+  pgdata:

@@ -304,3 +304,12 @@
 {"level":"info","message":"DB Connected via pg pool successfully!","timestamp":"2026-05-31T14:04:12.118Z"}
 {"level":"info","message":"Server running on http://192.168.1.5:3001","timestamp":"2026-05-31T14:04:12.121Z"}
 {"level":"info","message":"Also available on http://localhost:3001","timestamp":"2026-05-31T14:04:12.122Z"}
+{"level":"info","message":"Connecting to db at db:5432","timestamp":"2026-05-31T14:04:25.205Z"}
+{"level":"info","message":"DB Connected via pg pool successfully!","timestamp":"2026-05-31T14:04:25.242Z"}
+{"level":"info","message":"Server running on http://192.168.1.5:3001","timestamp":"2026-05-31T14:04:25.245Z"}
+{"level":"info","message":"Also available on http://localhost:3001","timestamp":"2026-05-31T14:04:25.246Z"}
+{"level":"info","message":"172.18.0.1 - - [31/May/2026:14:04:34 +0000] \"GET /ai HTTP/1.1\" 200 819 \"-\" \"Thunder Client (https://www.thunderclient.com)\"","timestamp":"2026-05-31T14:04:34.712Z"}
+{"level":"info","message":"Connecting to db at db:5432","timestamp":"2026-05-31T14:16:04.303Z"}
+{"level":"info","message":"DB Connected via pg pool successfully!","timestamp":"2026-05-31T14:16:04.359Z"}
+{"level":"info","message":"Server running on http://192.168.1.5:3001","timestamp":"2026-05-31T14:16:04.363Z"}
+{"level":"info","message":"Also available on http://localhost:3001","timestamp":"2026-05-31T14:16:04.363Z"}
