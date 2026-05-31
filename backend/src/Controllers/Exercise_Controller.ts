@@ -110,4 +110,31 @@ export class ExerciseController {
             return res.status(400).json({ success: false, message: err.message || "Ошибка сервера" });
         }
     }
+
+    static getNextExercise: ControllerMethods = async (req, res, next) => {
+        try {
+            const {workoutId} = req.params as {workoutId: string}
+            
+            const currentOrder = parseInt(req.query.currentExerciseOrder as string)
+            
+            if(!workoutId || isNaN(currentOrder)) {
+                return res.status(400).json({ success: false, message: "Некорректные параметры запроса" });
+            }
+
+            const result = await ExerciseService.getNextExercise(workoutId, currentOrder)
+            
+            return res.status(200).json({
+                success: true,
+                data: result || null,
+                isFinished: !result
+            })
+        }catch(err: any) {
+            logger.error("Ошибка при переключении на следующее упражнение:", {error: err.message });
+
+            if (err.code === 'P2025') {
+                return res.status(404).json({ success: false, message: "Упражнение не найдено или доступ запрещен" });
+            }
+            return res.status(400).json({ success: false, message: err.message || "Ошибка сервера" });
+        }
+    }
 }

@@ -193,3 +193,35 @@
 {"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:56:00.042Z"}
 {"level":"info","message":"Cron: проверка абонементов...","timestamp":"2026-05-31T10:57:00.014Z"}
 {"level":"info","message":"Cron: найдено 0 просроченных подписок","timestamp":"2026-05-31T10:57:00.044Z"}
+{"level":"info","message":"Connecting to db at db:5432","timestamp":"2026-05-31T10:57:27.594Z"}
+{"level":"info","message":"DB Connected via pg pool successfully!","timestamp":"2026-05-31T10:57:27.647Z"}
+{"level":"info","message":"Server running on http://192.168.1.5:3001","timestamp":"2026-05-31T10:57:27.651Z"}
+{"level":"info","message":"Also available on http://localhost:3001","timestamp":"2026-05-31T10:57:27.653Z"}
+{"level":"info","message":"Connecting to db at db:5432","timestamp":"2026-05-31T13:22:27.064Z"}
+{"level":"info","message":"DB Connected via pg pool successfully!","timestamp":"2026-05-31T13:22:27.147Z"}
+{"level":"info","message":"Server running on http://192.168.1.5:3001","timestamp":"2026-05-31T13:22:27.152Z"}
+{"level":"info","message":"Also available on http://localhost:3001","timestamp":"2026-05-31T13:22:27.154Z"}
+{"level":"info","message":"Connecting to db at db:5432","timestamp":"2026-05-31T13:23:43.451Z"}
+{"level":"info","message":"DB Connected via pg pool successfully!","timestamp":"2026-05-31T13:23:43.511Z"}
+{"level":"info","message":"Server running on http://192.168.1.5:3001","timestamp":"2026-05-31T13:23:43.515Z"}
+{"level":"info","message":"Also available on http://localhost:3001","timestamp":"2026-05-31T13:23:43.524Z"}
+{"level":"info","message":"Connecting to db at db:5432","timestamp":"2026-05-31T13:25:51.034Z"}
+{"level":"info","message":"DB Connected via pg pool successfully!","timestamp":"2026-05-31T13:25:51.097Z"}
+{"level":"info","message":"Server running on http://192.168.1.5:3001","timestamp":"2026-05-31T13:25:51.101Z"}
+{"level":"info","message":"Also available on http://localhost:3001","timestamp":"2026-05-31T13:25:51.102Z"}
+{"level":"info","message":"Connecting to db at db:5432","timestamp":"2026-05-31T13:27:17.206Z"}
+{"level":"info","message":"DB Connected via pg pool successfully!","timestamp":"2026-05-31T13:27:17.267Z"}
+{"level":"info","message":"Server running on http://192.168.1.5:3001","timestamp":"2026-05-31T13:27:17.273Z"}
+{"level":"info","message":"Also available on http://localhost:3001","timestamp":"2026-05-31T13:27:17.273Z"}
+{"level":"info","message":"Connecting to db at db:5432","timestamp":"2026-05-31T13:29:33.386Z"}
+{"level":"info","message":"DB Connected via pg pool successfully!","timestamp":"2026-05-31T13:29:33.436Z"}
+{"level":"info","message":"Server running on http://192.168.1.5:3001","timestamp":"2026-05-31T13:29:33.439Z"}
+{"level":"info","message":"Also available on http://localhost:3001","timestamp":"2026-05-31T13:29:33.440Z"}
+{"level":"info","message":"Connecting to db at db:5432","timestamp":"2026-05-31T13:31:05.208Z"}
+{"level":"info","message":"DB Connected via pg pool successfully!","timestamp":"2026-05-31T13:31:05.250Z"}
+{"level":"info","message":"Server running on http://192.168.1.5:3001","timestamp":"2026-05-31T13:31:05.254Z"}
+{"level":"info","message":"Also available on http://localhost:3001","timestamp":"2026-05-31T13:31:05.255Z"}
+{"level":"info","message":"Connecting to db at db:5432","timestamp":"2026-05-31T13:31:17.098Z"}
+{"level":"info","message":"DB Connected via pg pool successfully!","timestamp":"2026-05-31T13:31:17.139Z"}
+{"level":"info","message":"Server running on http://192.168.1.5:3001","timestamp":"2026-05-31T13:31:17.142Z"}
+{"level":"info","message":"Also available on http://localhost:3001","timestamp":"2026-05-31T13:31:17.143Z"}

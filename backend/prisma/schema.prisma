@@ -123,6 +123,7 @@ model aiGeneration {
 
 model Exercise {
   id                String @id @default(uuid())
+  order             Int
   name              String
   reps              String
   sets              String

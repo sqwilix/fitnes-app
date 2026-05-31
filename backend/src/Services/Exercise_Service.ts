@@ -10,6 +10,10 @@ export class ExerciseService {
         if(!workout) {
             throw new Error("Тренировка не найдена")
         }
+        
+        const exerciseCount = await prisma.exercise.count({
+            where: {workoutSessionId: workoutId}
+        })
 
         return await prisma.exercise.create({
             data: {
@@ -17,6 +21,7 @@ export class ExerciseService {
                 reps: data.reps,
                 sets: data.sets,
                 weight: data.weight,
+                order: exerciseCount + 1,
                 workoutSessionId: workoutId
             }
         })
@@ -69,6 +74,16 @@ export class ExerciseService {
 
         return await prisma.exercise.delete({
             where: {id: exerciseId}
+        })
+    }
+
+    static async getNextExercise(workoutId: string, currentExerciseOrder: number) {
+        return await prisma.exercise.findFirst({
+            where: {
+                workoutSessionId: workoutId,
+                order: {gt: currentExerciseOrder}
+            },
+            orderBy: {order: "asc"}
         })
     }
 }
