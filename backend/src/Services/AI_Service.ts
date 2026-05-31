@@ -33,7 +33,7 @@ export class AIService {
                     content: userPrompt
                 }
             ],
-            model: "llama3-70b-8192",
+            model: "llama-3.3-70b-versatile",
             temperature: 0.3,
             response_format: { type: "json_object" } 
         })
@@ -46,6 +46,13 @@ export class AIService {
                 response: resultText,
                 clientId: clientId
             }
+        })
+    }
+
+    static async getHistory(clientId: string) {
+        return await prisma.aiGeneration.findMany({
+            where: {clientId: clientId},
+            orderBy: {createdAt: "asc"}
         })
     }
 }

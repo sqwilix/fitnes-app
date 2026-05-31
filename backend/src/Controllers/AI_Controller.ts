@@ -28,4 +28,23 @@ export class AIController {
             });
         }
     }
+
+    static getHistory: ControllerMethods = async (req, res, next) => {
+        try {
+            const {clientId} = req.body
+
+            if(!clientId) {
+                return res.status(400).json({ success: false, message: "Не указан clientId" });
+            }
+
+            const history = await AIService.getHistory(clientId)
+
+            return res.status(200).json({
+                success: true,
+                ai: history
+            })
+        }catch(err: any) {
+
+        }
+    }
 }

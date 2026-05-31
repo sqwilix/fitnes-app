@@ -273,3 +273,34 @@
 {"level":"info","message":"DB Connected via pg pool successfully!","timestamp":"2026-05-31T13:55:52.609Z"}
 {"level":"info","message":"Server running on http://192.168.1.5:3001","timestamp":"2026-05-31T13:55:52.612Z"}
 {"level":"info","message":"Also available on http://localhost:3001","timestamp":"2026-05-31T13:55:52.613Z"}
+{"level":"info","message":"Connecting to db at db:5432","timestamp":"2026-05-31T13:57:08.487Z"}
+{"level":"info","message":"DB Connected via pg pool successfully!","timestamp":"2026-05-31T13:57:08.642Z"}
+{"level":"info","message":"Server running on http://192.168.1.5:3001","timestamp":"2026-05-31T13:57:08.655Z"}
+{"level":"info","message":"Also available on http://localhost:3001","timestamp":"2026-05-31T13:57:08.656Z"}
+{"level":"info","message":"Connecting to db at db:5432","timestamp":"2026-05-31T13:57:53.176Z"}
+{"level":"info","message":"DB Connected via pg pool successfully!","timestamp":"2026-05-31T13:57:53.220Z"}
+{"level":"info","message":"Server running on http://192.168.1.5:3001","timestamp":"2026-05-31T13:57:53.223Z"}
+{"level":"info","message":"Also available on http://localhost:3001","timestamp":"2026-05-31T13:57:53.224Z"}
+{"level":"info","message":"Connecting to db at db:5432","timestamp":"2026-05-31T13:57:57.936Z"}
+{"level":"info","message":"DB Connected via pg pool successfully!","timestamp":"2026-05-31T13:57:57.984Z"}
+{"level":"info","message":"Server running on http://192.168.1.5:3001","timestamp":"2026-05-31T13:57:57.988Z"}
+{"level":"info","message":"Also available on http://localhost:3001","timestamp":"2026-05-31T13:57:57.988Z"}
+{"level":"info","message":"Connecting to db at db:5432","timestamp":"2026-05-31T13:58:48.348Z"}
+{"level":"info","message":"DB Connected via pg pool successfully!","timestamp":"2026-05-31T13:58:48.397Z"}
+{"level":"info","message":"Server running on http://192.168.1.5:3001","timestamp":"2026-05-31T13:58:48.405Z"}
+{"level":"info","message":"Also available on http://localhost:3001","timestamp":"2026-05-31T13:58:48.406Z"}
+{"error":"400 {\"error\":{\"message\":\"The model `llama3-70b-8192` has been decommissioned and is no longer supported. Please refer to https://console.groq.com/docs/deprecations for a recommendation on which model to use instead.\",\"type\":\"invalid_request_error\",\"code\":\"model_decommissioned\"}}","level":"error","message":"Ошибка при генерации тренировки","timestamp":"2026-05-31T14:00:01.627Z"}
+{"level":"info","message":"172.18.0.1 - - [31/May/2026:14:00:01 +0000] \"POST /ai HTTP/1.1\" 500 395 \"-\" \"Thunder Client (https://www.thunderclient.com)\"","timestamp":"2026-05-31T14:00:01.644Z"}
+{"level":"info","message":"Connecting to db at db:5432","timestamp":"2026-05-31T14:00:35.327Z"}
+{"level":"info","message":"DB Connected via pg pool successfully!","timestamp":"2026-05-31T14:00:35.372Z"}
+{"level":"info","message":"Server running on http://192.168.1.5:3001","timestamp":"2026-05-31T14:00:35.376Z"}
+{"level":"info","message":"Also available on http://localhost:3001","timestamp":"2026-05-31T14:00:35.376Z"}
+{"level":"info","message":"172.18.0.1 - - [31/May/2026:14:00:34 +0000] \"POST /ai HTTP/1.1\" 201 880 \"-\" \"Thunder Client (https://www.thunderclient.com)\"","timestamp":"2026-05-31T14:00:34.459Z"}
+{"level":"info","message":"Connecting to db at db:5432","timestamp":"2026-05-31T14:02:28.456Z"}
+{"level":"info","message":"DB Connected via pg pool successfully!","timestamp":"2026-05-31T14:02:28.499Z"}
+{"level":"info","message":"Server running on http://192.168.1.5:3001","timestamp":"2026-05-31T14:02:28.502Z"}
+{"level":"info","message":"Also available on http://localhost:3001","timestamp":"2026-05-31T14:02:28.503Z"}
+{"level":"info","message":"Connecting to db at db:5432","timestamp":"2026-05-31T14:04:12.069Z"}
+{"level":"info","message":"DB Connected via pg pool successfully!","timestamp":"2026-05-31T14:04:12.118Z"}
+{"level":"info","message":"Server running on http://192.168.1.5:3001","timestamp":"2026-05-31T14:04:12.121Z"}
+{"level":"info","message":"Also available on http://localhost:3001","timestamp":"2026-05-31T14:04:12.122Z"}
