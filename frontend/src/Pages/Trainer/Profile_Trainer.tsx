@@ -20,7 +20,7 @@ export default function ProfileTrainer() {
                 setTrainer(data)
             }
         }catch(err: any) {
-
+            console.error("Ошибка при получении данных профиля:", err.response?.data?.message || err.message);
         }
     }
 
