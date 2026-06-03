@@ -49,4 +49,17 @@ export class SubscriptionController {
             return res.status(400).json({ success: false, message: err.message });
         }
     }
+
+    static getSubscriptions: ControllerMethods = async (req, res, next) => {
+        try {
+            const clientId = (req.query.clientId as string) || req.user?.userId;
+
+            const result = await SubscriptionService.getSubscriptions(clientId)
+            
+            return res.status(200).json({success: true, data: result})
+        }catch(err: any) {
+            logger.error("Ошибка при получении абониментов:", { error: err.message });
+            return res.status(400).json({ success: false, message: err.message });
+        }
+    }
 }

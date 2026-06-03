@@ -47,4 +47,11 @@ export class SubscriptionService {
             }
         })
     }
+
+    static async getSubscriptions(clientId?: string) {
+        return await prisma.subscription.findMany({
+            where: clientId ? {clientId} : {},
+            include: {client: true}
+        })
+    }
 }
