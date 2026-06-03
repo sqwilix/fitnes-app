@@ -20,6 +20,14 @@ export class ProfileService {
     }
 
     static async updateProfile(userId: string, role: string, data: any) {
+        await prisma.user.update({
+            where: {id: userId},
+            data: {
+                firstName: data.firstName,
+                lastName: data.lastName
+            }
+        })
+
         if(role === "TRAINER") {
             return await prisma.trainerProfile.update({
                 where: {userId},
