@@ -21,4 +21,14 @@ export class UserService {
             data: {trainerId: trainerId}
         })
     }
+
+    static async getMyClients(trainerId: string) {
+        return await prisma.user.findMany({
+            where: {
+                role: "CLIENT",
+                clientProfile: {trainerId: trainerId}
+            },
+            include: {clientProfile: true}
+        })
+    }
 }

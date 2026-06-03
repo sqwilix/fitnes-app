@@ -9,6 +9,7 @@ import workoutRoute from './Routes/Workout_Route.js'
 import exerciseRoute from './Routes/Exercise_Route.js'
 import subscriptionRoute from './Routes/Subscription_Route.js'
 import aiRoute from './Routes/AI_Route.js'
+import clientRoute from './Routes/User_Route.js'
 import { initCronJobs } from './Utils/cron.js';
 
 
@@ -39,5 +40,6 @@ app.use("/workout", workoutRoute)
 app.use("/workout", exerciseRoute)
 app.use("/subscription", subscriptionRoute)
 app.use("/ai", aiRoute)
+app.use("/client", clientRoute)
 
 export default app
