@@ -103,7 +103,7 @@ export default function HomeTrainer() {
                                     <li key={client.id} className="flex justify-between items-center p-3 bg-[#012022] rounded-lg border border-[#00f0af]/10">
                                         <span>{client.firstName} {client.lastName}</span>
                                         <button 
-                                            onClick={() => console.log("Назначить", client.id)}
+                                            // onClick={() => }
                                             className="bg-[#00f0af] text-black px-3 py-1 rounded-md text-sm font-medium"
                                         >
                                             Выбрать

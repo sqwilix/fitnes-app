@@ -14,3 +14,12 @@ export const getFreeClients = async () => {
     const res = await axios.get(`${API_BASE_URL}/client/free`, getHeaders());
     return res.data.data; 
 };
+
+export const assignClientToTrainer = async (clientId: string) => {
+    const res = await axios.post(`${API_BASE_URL}/client/assign`, 
+        {clientId},
+        getHeaders()
+    )
+
+    return res.data.data
+}

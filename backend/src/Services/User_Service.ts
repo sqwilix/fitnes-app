@@ -11,7 +11,14 @@ export class UserService {
                     trainerId: null
                 }
             },
-            include: {clientProfile: true}
+            select: {
+                id: true,
+                email: true,
+                firstName: true,
+                lastName: true,
+                role: true,
+                clientProfile: true
+            }
         })
     }
 
@@ -28,7 +35,14 @@ export class UserService {
                 role: "CLIENT",
                 clientProfile: {trainerId: trainerId}
             },
-            include: {clientProfile: true}
+            select: {
+                id: true,
+                email: true,
+                firstName: true,
+                lastName: true,
+                role: true,
+                clientProfile: true
+            }
         })
     }
 }

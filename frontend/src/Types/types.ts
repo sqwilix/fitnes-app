@@ -19,3 +19,13 @@ export interface IUser {
         speciality: string
     }
 }
+
+export interface IClientProfile {
+    createdAt: string,
+    email: string,
+    firstName: string,
+    id: string,
+    lastName: string,
+    role: string,
+    updatedAt: string
+}
