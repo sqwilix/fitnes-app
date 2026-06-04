@@ -1,12 +1,13 @@
 import { Plus, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { getFreeClients, getMyClients } from "../../Services/Clients_Service";
+import { assignClientToTrainer, getFreeClients, getMyClients } from "../../Services/Clients_Service";
+import type { IClientProfile } from "../../Types/types";
 
 
 export default function HomeTrainer() {
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [myClients, setMyClients] = useState([])
-    const [freeClients, setFreeClients] = useState([])
+    const [freeClients, setFreeClients] = useState<IClientProfile[]>([])
     const [search, setSearch] = useState<string>("")
 
     const fetchMyClients = async () => {
@@ -38,13 +39,26 @@ export default function HomeTrainer() {
         client.lastName?.toLowerCase().includes(search.toLowerCase())
     )
 
+    const handleAssign = async (clientId: string) => {
+        try {
+            const data = await assignClientToTrainer(clientId)
+
+            if(data) {
+                fetchFreeClients()
+            }
+        }catch(err: any) {
+            console.error("Ошибка при присвоении клиента:", err.response?.data?.message || err.message);
+        }
+    }
+
     useEffect(() => {
         fetchMyClients()
         fetchFreeClients()
     }, [])
 
-    console.log(freeClients);
+    console.log(myClients);
     
+
     return(
         <div className="">
             <div className="flex w-full items-center justify-between">
@@ -99,14 +113,19 @@ export default function HomeTrainer() {
                                     <p>Нет свободных клиентов</p>
                                 </div>
                             ) : (
-                                filteredClients.map((client: any) => (
-                                    <li key={client.id} className="flex justify-between items-center p-3 bg-[#012022] rounded-lg border border-[#00f0af]/10">
-                                        <span>{client.firstName} {client.lastName}</span>
+                                filteredClients.map((client) => (
+                                    <li key={client.id} className="flex justify-between items-center p-3 hover:bg-[#012022] rounded-lg border border-[#00f0af]/10 transition-all duration-200">
+                                        <div className="flex items-center gap-3">
+                                            <div className="bg-[#00f0af] text-black w-9 h-9 rounded-full font-bold flex items-center justify-center">
+                                                {client.firstName.charAt(0).toUpperCase()}
+                                            </div>
+                                            <span className="font-medium">{client.firstName}</span>
+                                        </div>
                                         <button 
-                                            // onClick={() => }
-                                            className="bg-[#00f0af] text-black px-3 py-1 rounded-md text-sm font-medium"
+                                            onClick={() => handleAssign(client.id)}
+                                            className="text-gray-500"
                                         >
-                                            Выбрать
+                                            <Plus size={18}/>
                                         </button>
                                     </li>
                                 ))

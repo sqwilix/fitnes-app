@@ -22,18 +22,32 @@ export class UserService {
         })
     }
 
-    static async assignClientToTrainer(trainerId: string, clientId: string) {
+    static async assignClientToTrainer(userId: string, clientId: string) {
+        const trainerProfile = await prisma.trainerProfile.findUnique({
+            where: {userId: userId}
+        })
+
+        if(!trainerProfile) {
+            throw new Error("Профиль тренера не найден для данного тренера")
+        }
+
         return await prisma.clientProfile.update({
             where: {userId: clientId},
-            data: {trainerId: trainerId}
+            data: {trainerId: trainerProfile.id}
         })
     }
 
-    static async getMyClients(trainerId: string) {
+    static async getMyClients(userId: string) {
+        const trainerProfile = await prisma.trainerProfile.findUnique({
+            where: {userId: userId}
+        })
+
+        if(!trainerProfile) return []
+
         return await prisma.user.findMany({
             where: {
                 role: "CLIENT",
-                clientProfile: {trainerId: trainerId}
+                clientProfile: {trainerId: trainerProfile.id}
             },
             select: {
                 id: true,
