@@ -11,6 +11,7 @@ import ProfileClient from './Pages/Client/Profile_Client'
 import HomeTrainer from './Pages/Trainer/Home_Trainer'
 import ProfileTrainer from './Pages/Trainer/Profile_Trainer'
 import TrainerLayout from './Components/Trainer/Trainer_Layout'
+import ClientById from './Pages/Trainer/Client_By_Id'
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
           <Route element={<TrainerLayout/>}>
             <Route path='/trainer' element={<HomeTrainer/>}/>
             <Route path='/trainer/profile' element={<ProfileTrainer/>}/>
+            <Route path='/trainer/client/:clientId' element={<ClientById/>}/>
           </Route>
         </Route>
       </Routes>

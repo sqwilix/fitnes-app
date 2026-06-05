@@ -1,9 +1,20 @@
 import { prisma } from "../Utils/prisma.js";
 
+interface CreateWorkoutInput {
+    clientId: string;
+    date: string;
+    title: string;
+    exercises: {
+        name: string;
+        sets: string;
+        reps: string;
+        weight: string;
+        order: number;
+    }[];
+}
 
 export class WorkoutService {
-    static async createWorkout(userId: string, data: {clientId: string, date: string, title: string}) {
-        console.log("Ищем профиль тренера для userId:", userId)
+    static async createWorkout(userId: string, data: CreateWorkoutInput) {
         const trainerProfile = await prisma.trainerProfile.findUnique({
             where: {userId: userId}
         })
@@ -28,14 +39,23 @@ export class WorkoutService {
 
             const workout = await tx.workoutSession.create({
                 data: {
-                    title: data.title || "Новая тернировка",
+                    title: data.title || "Новая тренировка",
                     date: new Date(data.date),
                     clientId: data.clientId,
                     isCompleted: false,
-                    trainerId: trainerProfile.id
+                    trainerId: trainerProfile.id,
+                    exercises: {
+                        create: data.exercises.map(ex => ({
+                            name: ex.name,
+                            sets: String(ex.sets),
+                            reps: String(ex.reps),
+                            weight: String(ex.weight),
+                            order: 0 
+                        }))
+                    }
                 },
-                include: {trainer: true, client: true}
-            })
+                include: { exercises: true } 
+            });
 
             await tx.subscription.update({
                 where: {id: subscription.id},

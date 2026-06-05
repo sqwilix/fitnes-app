@@ -42,3 +42,13 @@ export const updateTrainerProfile = async ({firstName, lastName, specialization,
 
     return res.data
 }
+
+export const getUserById = async (clientId: string) => {
+    const token = localStorage.getItem("accessToken");
+    
+    const res = await axios.get(`${API_BASE_URL}/client/my/${clientId}`, {
+        headers: { "Authorization": `Bearer ${token}` }
+    });
+
+    return res.data.data
+}

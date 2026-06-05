@@ -27,5 +27,22 @@ export interface IClientProfile {
     id: string,
     lastName: string,
     role: string,
-    updatedAt: string
+    updatedAt: string,
+    clientProfile: {
+        id: string,
+        weight: number,
+        height: number,
+        goal: string
+        subscriptions?: {
+            status: string,
+            title: string,
+            totalLessons: number,
+            remainingLesson: number,
+            startDate: Date,
+            endDate: Date,
+            freezeDaysAllowed: number,
+            freezeDaysRemaining: number,
+            frozenAt: Date
+        }[]
+    }
 }

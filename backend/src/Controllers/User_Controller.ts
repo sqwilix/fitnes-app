@@ -41,4 +41,21 @@ export class UserController {
             return res.status(400).json({ success: false, message: err.message });
         }
     }
+
+    static getMyClientById: ControllerMethods = async (req, res, next) => {
+        try {
+            const {clientId} = req.params as {clientId: string}
+
+            const result = await UserService.getMyClientById(clientId)
+
+            if (!result) {
+                return res.status(404).json({ success: false, message: "Клиент не найден" });
+            }
+
+            return res.status(200).json({success: true, data: result})
+        }catch(err: any) {
+            logger.error("Ошибка при получении своего клиента по айди:", { error: err.message });
+            return res.status(400).json({ success: false, message: err.message });
+        }
+    }
 }

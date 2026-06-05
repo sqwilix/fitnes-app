@@ -6,8 +6,11 @@ import { UserController } from "../Controllers/User_Controller.js";
 
 const router = Router()
 
-router.get('/free', authGuard as RequestHandler, roleGuard(["TRAINER"]) as RequestHandler, UserController.getClients as RequestHandler)
-router.get('/my', authGuard as RequestHandler, roleGuard(["TRAINER"]) as RequestHandler, UserController.getMyClients as RequestHandler)
-router.post('/assign', authGuard as RequestHandler, roleGuard(["TRAINER"]) as RequestHandler, UserController.assignClientToTrainer as RequestHandler)
+router.use(authGuard as RequestHandler)
+
+router.get('/free', roleGuard(["TRAINER", "ADMIN"]) as RequestHandler, UserController.getClients as RequestHandler)
+router.get('/my', roleGuard(["TRAINER"]) as RequestHandler, UserController.getMyClients as RequestHandler)
+router.post('/assign', roleGuard(["TRAINER"]) as RequestHandler, UserController.assignClientToTrainer as RequestHandler)
+router.get('/my/:clientId', roleGuard(["TRAINER", "ADMIN"]) as RequestHandler, UserController.getMyClientById as RequestHandler)
 
 export default router

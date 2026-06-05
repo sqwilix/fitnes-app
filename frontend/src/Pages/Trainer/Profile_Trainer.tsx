@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import type { IUser } from "../../Types/types"
-import { getProfile, updateClientProfile, updateTrainerProfile } from "../../Services/User_Service"
+import { getProfile, updateTrainerProfile } from "../../Services/User_Service"
 import { Save } from "lucide-react"
 
 

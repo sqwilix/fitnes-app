@@ -5,11 +5,24 @@ import { ControllerMethods } from "../Types/types.js";
 import { logger } from "../Utils/logger.js";
 import { z } from "zod";
 
+interface CreateWorkoutInput {
+    clientId: string;
+    date: string;
+    title: string;
+    exercises: {
+        name: string;
+        sets: string;
+        reps: string;
+        weight: string;
+        order: number;
+    }[];
+}
+
 export class WorkoutController {
     static createWorkout: ControllerMethods = async(req, res, next) => {
         try {
             const { userId } = req.user;
-            const validatedData = CreateWorkoutSchema.parse(req.body);
+            const validatedData = CreateWorkoutSchema.parse(req.body) as CreateWorkoutInput
     
             const workout = await WorkoutService.createWorkout(userId, validatedData);
     

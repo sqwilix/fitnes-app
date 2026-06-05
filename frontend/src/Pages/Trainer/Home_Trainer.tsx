@@ -1,14 +1,16 @@
-import { Plus, X } from "lucide-react";
+import { ChevronRight, Plus, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { assignClientToTrainer, getFreeClients, getMyClients } from "../../Services/Clients_Service";
 import type { IClientProfile } from "../../Types/types";
+import { useNavigate } from "react-router-dom";
 
 
 export default function HomeTrainer() {
     const [isOpen, setIsOpen] = useState<boolean>(false)
-    const [myClients, setMyClients] = useState([])
+    const [myClients, setMyClients] = useState<IClientProfile[]>([])
     const [freeClients, setFreeClients] = useState<IClientProfile[]>([])
     const [search, setSearch] = useState<string>("")
+    const navigate = useNavigate()
 
     const fetchMyClients = async () => {
         try {
@@ -76,13 +78,46 @@ export default function HomeTrainer() {
                 </button>
             </div>
 
-            {myClients.length === 0 ? (
-                <div className="bg-[#012022] border border-[#00f0af]/10 p-5 py-10 rounded-xl mt-7 flex items-center justify-center">
-                    Клиенты пока что не добавлены
-                </div>
-            ) : (
-                <div className=""></div>
-            )}
+            <div className="mt-10">
+                {myClients.length === 0 ? (
+                    <div className="bg-[#012022] border border-[#00f0af]/10 p-5 py-10 rounded-xl mt-7 flex items-center justify-center">
+                        Клиенты пока что не добавлены
+                    </div>
+                ) : (
+                    myClients.map((client) => (
+                        <li
+                            onClick={() => navigate(`/trainer/client/${client.id}`)}
+                            key={client.id}
+                            className="w-full flex items-center justify-between bg-[#012022] border border-[#00f0af]/10 hover:border-[#00f0af]/35 p-5 rounded-xl transition-all duration-200"
+                        >   
+                            <div className="flex gap-3 items-center">
+                                <div className="w-12 h-12 flex items-center justify-center bg-[#00f0af] rounded-full text-black font-bold">
+                                    {client.firstName.charAt(0)}
+                                </div>
+                                <div className="flex flex-col">
+                                    <h3 className="font-bold">{client.firstName}</h3>
+                                    <p className="text-sm text-gray-400">
+                                        {
+                                            (client.clientProfile.subscriptions?.length ?? 0) > 0
+                                                ? (() => {
+                                                    const sub = client.clientProfile.subscriptions![0];
+                                                    return (sub.status === "EXPIRED" || sub.totalLessons === 0)
+                                                        ? "Нет активного абонемента" 
+                                                        : `${sub.totalLessons}/${sub.remainingLesson}`;
+                                                })()
+                                                : "Нет активного абонемента"
+                                        }
+                                    </p>
+                                </div>
+                            </div>
+
+                            <button className="text-gray-500">
+                                <ChevronRight size={20}/>
+                            </button>
+                        </li>
+                    ))
+                )}
+            </div>
 
             {isOpen && (
                 <div className="fixed z-50 bg-black/70 flex items-center justify-center w-full h-screen inset-0">

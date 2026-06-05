@@ -55,7 +55,66 @@ export class UserService {
                 firstName: true,
                 lastName: true,
                 role: true,
-                clientProfile: true
+                clientProfile: {
+                    select: {
+                        id: true,
+                        weight: true,
+                        height: true,
+                        goal: true,
+                        subscriptions: {
+                            select: {
+                                id: true,
+                                title: true,
+                                status: true,
+                                totalLessons: true,
+                                remainingLesson: true,
+                                startDate: true,
+                                endDate: true,
+                                freezeDaysAllowed: true,
+                                freezeDaysRemaining: true,
+                                frozenAt: true
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    }
+
+    static async getMyClientById(clientId: string) {
+        return await prisma.user.findFirst({
+            where: {
+                role: "CLIENT",
+                id: clientId
+            },
+            select: {
+                id: true,
+                email: true,
+                firstName: true,
+                lastName: true,
+                role: true,
+                clientProfile: {
+                    select: {
+                        id: true,
+                        weight: true,
+                        height: true,
+                        goal: true,
+                        subscriptions: {
+                            select: {
+                                id: true,
+                                title: true,
+                                status: true,
+                                totalLessons: true,
+                                remainingLesson: true,
+                                startDate: true,
+                                endDate: true,
+                                freezeDaysAllowed: true,
+                                freezeDaysRemaining: true,
+                                frozenAt: true
+                            }
+                        }
+                    }
+                }
             }
         })
     }

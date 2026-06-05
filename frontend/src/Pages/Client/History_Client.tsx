@@ -6,20 +6,20 @@ export default function HistoryClient() {
     const [workouts, setWorkouts] = useState([])
 
     const fetchWorkouts = async () => {
-            try {
-                const data = await getWorkouts()
-    
-                if(data) {
-                    setWorkouts(data)
-                }
-            }catch(err: any) {
-                console.error("Ошибка при получении тренировок:", err.response?.data?.message || err.message);
+        try {
+            const data = await getWorkouts()
+
+            if(data) {
+                setWorkouts(data)
             }
+        }catch(err: any) {
+            console.error("Ошибка при получении тренировок:", err.response?.data?.message || err.message);
         }
-    
-        useEffect(() => {
-            fetchWorkouts()
-        }, [])
+    }
+
+    useEffect(() => {
+        fetchWorkouts()
+    }, [])
     
     return(
         <div className="w-full md:w-[50%] lg:w-[35%] flex flex-col items-start justify-center mx-auto mt-7">
