@@ -6,7 +6,6 @@ import { logger } from './Utils/logger.js';
 import authRoute from './Routes/Auth_Route.js'
 import profileRoute from './Routes/Profile_Route.js'
 import workoutRoute from './Routes/Workout_Route.js'
-import exerciseRoute from './Routes/Exercise_Route.js'
 import subscriptionRoute from './Routes/Subscription_Route.js'
 import aiRoute from './Routes/AI_Route.js'
 import clientRoute from './Routes/User_Route.js'
@@ -37,7 +36,6 @@ app.get('/health', (req, res) => {
 app.use("/auth", authRoute)
 app.use("/user", profileRoute)
 app.use("/workout", workoutRoute)
-app.use("/workout", exerciseRoute)
 app.use("/subscription", subscriptionRoute)
 app.use("/ai", aiRoute)
 app.use("/client", clientRoute)

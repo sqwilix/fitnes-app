@@ -34,6 +34,7 @@ export interface IClientProfile {
         height: number,
         goal: string
         subscriptions?: {
+            id: string,
             status: string,
             title: string,
             totalLessons: number,

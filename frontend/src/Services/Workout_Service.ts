@@ -14,12 +14,21 @@ export interface ICreateWorkoutRequest {
     }[];
 }
 
-export const getWorkouts = async () => {
-    const res = await axios.get(`${API_BASE_URL}/workout`)
-
-    return res.data
+// В Workout_Service.ts
+export const getWorkouts = async (clientId: string) => {
+    // Получаем токен из localStorage (или там, где ты его хранишь)
+    const token = localStorage.getItem('token'); 
+    
+    const url = clientId ? `${API_BASE_URL}/workout?clientId=${clientId}` : `${API_BASE_URL}/workout`;
+    
+    const res = await axios.get(url, {
+        headers: {
+            Authorization: `Bearer ${token}` // Добавляем заголовок
+        }
+    });
+    
+    return res.data;
 }
-
 export const createWorkout = async (workoutData: ICreateWorkoutRequest) => {
     const token = localStorage.getItem("accessToken")
 

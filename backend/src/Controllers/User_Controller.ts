@@ -58,4 +58,15 @@ export class UserController {
             return res.status(400).json({ success: false, message: err.message });
         }
     }
+
+    static getAllClients: ControllerMethods = async (req, res, next) => {
+        try {
+            const result = await UserService.getAllClients()
+
+            return res.status(200).json({success: true, data: result})
+        }catch(err: any) {
+            logger.error("Ошибка при получении всех клиентов:", { error: err.message });
+            return res.status(400).json({ success: false, message: err.message });
+        }
+    }
 }

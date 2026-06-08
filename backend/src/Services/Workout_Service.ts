@@ -16,32 +16,58 @@ interface CreateWorkoutInput {
 export class WorkoutService {
     static async createWorkout(userId: string, data: CreateWorkoutInput) {
         const trainerProfile = await prisma.trainerProfile.findUnique({
-            where: {userId: userId}
-        })
+            where: { userId: userId }
+        });
 
         if (!trainerProfile) {
             throw new Error("Действие разрешено только для тренеров");
         }
 
         return await prisma.$transaction(async (tx) => {
+            const client = await tx.clientProfile.findFirst({
+                where: {
+                    OR: [
+                        {id: data.clientId},
+                        {userId: data.clientId}
+                    ]
+                }
+            });
+
+            const allClients = await tx.clientProfile.findMany({ select: { id: true, userId: true } });
+            console.log("--- СПИСОК ВСЕХ КЛИЕНТОВ В БАЗЕ ---", allClients);
+            console.log("--- КЛИЕНТ, КОТОРОГО МЫ ИЩЕМ ---", data.clientId);
+
+            if (!client) {
+                throw new Error("Клиент с таким ID не найден в базе данных");
+            }
+
+            const actualClientId = client.id
+
             const subscription = await tx.subscription.findFirst({
                 where: {
-                    clientId: data.clientId,
-                    status: "ACTIVE",
-                    endDate: {gte: new Date()},
-                    remainingLesson: {gt: 0}
+                    clientId: actualClientId,
+                    status: "ACTIVE"
                 }
-            })
+            });
 
-            if(!subscription) {
-                throw new Error("У клиента нет активного абонимента или закончились занятия")
+            console.log("Диагностика:", { 
+                clientId: data.clientId, 
+                foundSubscription: !!subscription 
+            });
+
+            if (!subscription) {
+                throw new Error("У клиента нет активного абонемента");
+            }
+
+            if (subscription.remainingLesson <= 0) {
+                throw new Error("У клиента закончились занятия в абонементе");
             }
 
             const workout = await tx.workoutSession.create({
                 data: {
                     title: data.title || "Новая тренировка",
                     date: new Date(data.date),
-                    clientId: data.clientId,
+                    clientId: actualClientId,
                     isCompleted: false,
                     trainerId: trainerProfile.id,
                     exercises: {
@@ -50,40 +76,34 @@ export class WorkoutService {
                             sets: String(ex.sets),
                             reps: String(ex.reps),
                             weight: String(ex.weight),
-                            order: 0 
+                            order: ex.order || 0
                         }))
                     }
                 },
-                include: { exercises: true } 
+                include: { exercises: true }
             });
 
-            await tx.subscription.update({
-                where: {id: subscription.id},
-                data: {remainingLesson: {decrement: 1}}
-            })
-
-            return workout
-        })
+            return workout;
+        });
     }
 
-    static async getWorkouts(userId: string) {
-        const trainerProfile = await prisma.trainerProfile.findUnique({ where: { userId } });
-        if (trainerProfile) {
-            return await prisma.workoutSession.findMany({
-                where: { trainerId: trainerProfile.id },
-                include: { client: true, exercises: true }
-            });
+    static async getWorkouts(userId: string, clientId?: string) {
+        console.log("DEBUG: Ищем для clientId:", clientId);
+
+        const exactMatch = await prisma.workoutSession.findMany({
+            where: { clientId: clientId }
+        });
+        console.log("Найдено точным совпадением:", exactMatch.length);
+
+        if (exactMatch.length === 0) {
+            const all = await prisma.workoutSession.findMany();
+            console.log("Всего записей в WorkoutSession:", all.length);
+            if (all.length > 0) {
+                console.log("Пример первого clientId в базе:", all[0].clientId);
+            }
         }
 
-        const clientProfile = await prisma.clientProfile.findUnique({ where: { userId } });
-        if (clientProfile) {
-            return await prisma.workoutSession.findMany({
-                where: { clientId: clientProfile.id },
-                include: { trainer: true, exercises: true }
-            });
-        }
-
-        throw new Error("Профиль не найден (ни клиент, ни тренер)");
+        return exactMatch;
     }
 
     static async updateWorkout(workoutId: string, userId: string, data: any) {

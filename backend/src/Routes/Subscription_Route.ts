@@ -8,6 +8,8 @@ const router = Router()
 
 router.post('/', authGuard, roleGuard(["ADMIN"]) as RequestHandler, SubscriptionController.createSub as RequestHandler)
 router.get('/', authGuard, SubscriptionController.getSubscriptions as RequestHandler)
+router.put('/', authGuard, roleGuard(["ADMIN"]) as RequestHandler, SubscriptionController.updateSubscription as RequestHandler)
+router.delete('/', authGuard, roleGuard(["ADMIN"]) as RequestHandler, SubscriptionController.deleteSubscription as RequestHandler)
 router.patch('/:id', authGuard, roleGuard(["ADMIN"]) as RequestHandler, SubscriptionController.manage as RequestHandler)
 
 export default router

@@ -7,7 +7,7 @@ export async function authGuard(req: Request, res: Response, next: NextFunction)
         const header = req.headers.authorization
         if(!header?.startsWith("Bearer ")) {
             console.log("[GUARD DEBUG] not title");
-            return res.status(401)
+            return res.status(401).json({ message: "Отсутствует заголовок авторизации" });
         }
 
         const token = header.slice(7)

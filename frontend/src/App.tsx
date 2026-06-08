@@ -12,6 +12,9 @@ import HomeTrainer from './Pages/Trainer/Home_Trainer'
 import ProfileTrainer from './Pages/Trainer/Profile_Trainer'
 import TrainerLayout from './Components/Trainer/Trainer_Layout'
 import ClientById from './Pages/Trainer/Client_By_Id'
+import AdminLayout from './Components/Admin/Admin_Layout'
+import HomeAdmin from './Pages/Admin/Home_Admin'
+import AdminClientById from './Pages/Admin/Admin_Client_By_Id'
 
 
 function App() {
@@ -47,6 +50,13 @@ function App() {
             <Route path='/trainer' element={<HomeTrainer/>}/>
             <Route path='/trainer/profile' element={<ProfileTrainer/>}/>
             <Route path='/trainer/client/:clientId' element={<ClientById/>}/>
+          </Route>
+        </Route>
+
+        <Route element={<ProtectedRoute allowedRole='ADMIN'/>}>
+          <Route element={<AdminLayout/>}>
+            <Route path='/admin' element={<HomeAdmin/>}/>
+            <Route path='/admin/client/:clientId' element={<AdminClientById/>}/>
           </Route>
         </Route>
       </Routes>

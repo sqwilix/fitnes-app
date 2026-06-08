@@ -55,7 +55,11 @@ export default function TrainingTab({workouts, isOpen, setIsOpen, onSubmit, titl
                         <p className="text-center text-gray-400 text-[17px]">Тренировок ещё нет</p>
                     </div>
                 ) : (
-                    <div className=""></div>
+                    workouts.map((workout) => (
+                        <ul>
+                            
+                        </ul>
+                    ))
                 )}
             </div>
 

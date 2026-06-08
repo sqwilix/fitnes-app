@@ -10,6 +10,11 @@ export const getMyClients = async () => {
     return res.data.data; 
 };
 
+export const getAllClients = async () => {
+    const res = await axios.get(`${API_BASE_URL}/client/all`, getHeaders());
+    return res.data.data; 
+};
+
 export const getFreeClients = async () => {
     const res = await axios.get(`${API_BASE_URL}/client/free`, getHeaders());
     return res.data.data; 

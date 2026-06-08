@@ -46,10 +46,13 @@ export class WorkoutController {
     }
 
     static getWorkouts: ControllerMethods = async(req, res, next) => {
+        console.log("Контроллер: запрос принят");
+
         try {
             const { userId } = req.user;
-            const workouts = await WorkoutService.getWorkouts(userId);
-            return res.status(200).json({ success: true, workouts });
+            const {clientId} = req.query
+            const workouts = await WorkoutService.getWorkouts(userId, clientId as string);
+            return res.status(200).json({ success: true, data: workouts });
         } catch(err: any) {
             logger.error("Ошибка получения тренировок:", { userId: req.user?.userId, error: err.message });
             return res.status(400).json({

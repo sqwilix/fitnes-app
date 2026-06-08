@@ -1,4 +1,5 @@
 import { prisma } from "../Utils/prisma.js"
+import { SubscriptionStatus } from '@prisma/client'
 
 
 export class SubscriptionService {
@@ -52,6 +53,30 @@ export class SubscriptionService {
         return await prisma.subscription.findMany({
             where: clientId ? {clientId} : {},
             include: {client: true}
+        })
+    }
+
+    static async updateSubscription(subscriptionId: string, data: {title: string, totalLessons: number, durationDays: number, remainingLesson: number, status: string}) {
+        const endDate = new Date()
+        endDate.setDate(endDate.getDate() + data.durationDays)
+
+        const statusValue = data.status.toUpperCase() as SubscriptionStatus
+
+        return await prisma.subscription.update({
+            where: {id: subscriptionId},
+            data: {
+                title: data.title,
+                totalLessons: data.totalLessons,
+                remainingLesson: data.remainingLesson,
+                endDate: endDate,
+                status: statusValue
+            }
+        })
+    }
+
+    static async deleteSubscription(subscriptionId: string) {
+        return await prisma.subscription.delete({
+            where: {id: subscriptionId}
         })
     }
 }

@@ -23,14 +23,24 @@ export default function ClientById() {
 
 
     const fetchWorkouts = async () => {
-        try {
-            const data = await getWorkouts()
+        const profileId = user?.clientProfile?.id;
+        console.log("Пытаюсь отправить запрос с ID:", profileId);
 
-            if(data) {
-                setWorkouts(data)
+        if (!profileId) return;
+
+        try {
+            const response = await getWorkouts(profileId);
+            console.log("Успешный ответ от getWorkouts:", response);
+            if (response.success) {
+                setWorkouts(response.data); 
             }
-        }catch(err: any) {
-            console.error("Ошибка при получении тренировок:", err.response?.data?.message || err.message);
+        } catch(err: any) {
+            // ОЧЕНЬ ВАЖНО: посмотри, что здесь выведется
+            console.error("КРИТИЧЕСКАЯ ОШИБКА В ЗАПРОСЕ:", err);
+            if (err.response) {
+                console.error("Данные ошибки:", err.response.data);
+                console.error("Статус ошибки:", err.response.status);
+            }
         }
     }
 
@@ -76,7 +86,20 @@ export default function ClientById() {
         fetchWorkouts()
     }, [])
 
-    // console.log(workouts);
+    useEffect(() => {
+        console.log("--- ЭФФЕКТ ЗАПУЩЕН ---");
+        console.log("User:", user);
+        console.log("User Profile ID:", user?.clientProfile?.id);
+        
+        if (user && user.clientProfile?.id) {
+            console.log("Условия выполнены! Сейчас вызову fetchWorkouts...");
+            fetchWorkouts();
+        } else {
+            console.log("Условия НЕ выполнены (нет user или нет id).");
+        }
+    }, [user]);
+
+    console.log(workouts);
     
     return(
         <div className="flex flex-col">
@@ -102,7 +125,12 @@ export default function ClientById() {
                                     const sub = user!.clientProfile.subscriptions![0];
                                     return (sub.status === "EXPIRED" || sub.totalLessons === 0)
                                         ? "Нет активного абонемента" 
-                                        : `${sub.totalLessons}/${sub.remainingLesson}`;
+                                        : <span>
+                                            Абонимент: 
+                                            <span className="mx-1.5 text-[#00f0af]">{sub.title}</span>
+                                            · {sub.remainingLesson}/{sub.totalLessons}
+                                        </span>
+                                        // : `Абонемент: ${sub.title} · ${sub.totalLessons}/${sub.remainingLesson}`;
                                 })()
                                 : "Нет активного абонемента"
                         }

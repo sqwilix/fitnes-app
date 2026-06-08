@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom"
 
 
-export default function ProtectedRoute({allowedRole}: {allowedRole: "TRAINER" | "CLIENT"}) {
+export default function ProtectedRoute({allowedRole}: {allowedRole: "TRAINER" | "CLIENT" | "ADMIN"}) {
     const userString = localStorage.getItem("user")
     const user = userString ? JSON.parse(userString) : null
 

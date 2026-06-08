@@ -118,4 +118,39 @@ export class UserService {
             }
         })
     }
+
+    static async getAllClients() {
+        return await prisma.user.findMany({
+            where: {role: "CLIENT"},
+            select: {
+                id: true,
+                email: true,
+                firstName: true,
+                lastName: true,
+                role: true,
+                clientProfile: {
+                    select: {
+                        id: true,
+                        weight: true,
+                        height: true,
+                        goal: true,
+                        subscriptions: {
+                            select: {
+                                id: true,
+                                title: true,
+                                status: true,
+                                totalLessons: true,
+                                remainingLesson: true,
+                                startDate: true,
+                                endDate: true,
+                                freezeDaysAllowed: true,
+                                freezeDaysRemaining: true,
+                                frozenAt: true
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    }
 }
