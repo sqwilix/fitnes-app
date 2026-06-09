@@ -1,8 +1,9 @@
-import { Plus, X } from "lucide-react"
+import { Plus, Trash, Trash2, X } from "lucide-react"
 import { useState } from "react"
+import type { IWorkout } from "../../../Types/types"
 
 interface TrainingTabProps {
-    workouts: string[],
+    workouts: IWorkout[],
     isOpen: boolean,
     title: string,
     setTitle: (val: string) => void,
@@ -49,16 +50,36 @@ export default function TrainingTab({workouts, isOpen, setIsOpen, onSubmit, titl
                 Создать тренировку
             </button>
 
-            <div className="bg-[#012022] border border-dashed border-[#00f0af]/10 p-10 rounded-xl">
+            <div className="">
                 {workouts.length === 0 ? (
-                    <div className="w-full">
+                    <div className="w-full bg-[#012022] border border-dashed border-[#00f0af]/10 p-10 rounded-xl">
                         <p className="text-center text-gray-400 text-[17px]">Тренировок ещё нет</p>
                     </div>
                 ) : (
                     workouts.map((workout) => (
-                        <ul>
-                            
-                        </ul>
+                        <div 
+                            key={workout.id} 
+                            className="bg-[#012022] p-5 rounded-xl border border-[#00f0af]/20 hover:border-[#00f0af]/40 transition-all mb-3 flex items-center justify-between"
+                        >   
+                            <div className="flex flex-col">
+                                <h3 className="text-xl font-bold text-white">{workout.title}</h3>
+                                
+                                <div className="flex gap-1 items-center text-[12px] text-gray-400">
+                                    <p className="">
+                                        {new Date(workout.date).toLocaleDateString("en-GB", {day: "2-digit", month: "short", year: "numeric"}).replace("", "")}
+                                    </p>
+                                    <span>·</span>
+                                    <span>1 упр.</span>
+                                </div>
+                            </div>
+
+                            <button
+                                type="button"
+                                className="text-red-500 p-2.5 rounded-xl hover:bg-[#00f0af]/35 transition-all duration-200"
+                            >
+                                <Trash2 size={18}/>
+                            </button>
+                        </div>
                     ))
                 )}
             </div>

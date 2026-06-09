@@ -33,10 +33,6 @@ export class WorkoutService {
                 }
             });
 
-            const allClients = await tx.clientProfile.findMany({ select: { id: true, userId: true } });
-            console.log("--- СПИСОК ВСЕХ КЛИЕНТОВ В БАЗЕ ---", allClients);
-            console.log("--- КЛИЕНТ, КОТОРОГО МЫ ИЩЕМ ---", data.clientId);
-
             if (!client) {
                 throw new Error("Клиент с таким ID не найден в базе данных");
             }
@@ -70,20 +66,14 @@ export class WorkoutService {
                     clientId: actualClientId,
                     isCompleted: false,
                     trainerId: trainerProfile.id,
-                    exercises: {
-                        create: data.exercises.map(ex => ({
-                            name: ex.name,
-                            sets: String(ex.sets),
-                            reps: String(ex.reps),
-                            weight: String(ex.weight),
-                            order: ex.order || 0
-                        }))
-                    }
                 },
                 include: { exercises: true }
             });
 
-            return workout;
+            return await tx.workoutSession.findUnique({
+                where: { id: workout.id },
+                include: { exercises: true }
+            });
         });
     }
 
@@ -91,7 +81,8 @@ export class WorkoutService {
         console.log("DEBUG: Ищем для clientId:", clientId);
 
         const exactMatch = await prisma.workoutSession.findMany({
-            where: { clientId: clientId }
+            where: { clientId: clientId },
+            include: {exercises: true}
         });
         console.log("Найдено точным совпадением:", exactMatch.length);
 

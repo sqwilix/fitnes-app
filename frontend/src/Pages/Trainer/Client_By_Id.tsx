@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom"
 import { getUserById } from "../../Services/User_Service"
 import { useEffect, useState } from "react"
-import type { IClientProfile } from "../../Types/types"
+import type { IClientProfile, IWorkout } from "../../Types/types"
 import { ArrowLeft, Calendar, Crown, TrendingUp } from "lucide-react"
 import { createWorkout, getWorkouts, type ICreateWorkoutRequest } from "../../Services/Workout_Service"
 import TrainingTab, { type Exercise } from "../../Components/Trainer/Tabs/Training_Tab"
@@ -14,7 +14,7 @@ export default function ClientById() {
     const [user, setUser] = useState<IClientProfile | null>(null)
     const [tabs, setTabs] = useState<Tabs>("trainings")
     const [isOpen, setIsOpen] = useState<boolean>(false)
-    const [workouts, setWorkouts] = useState([])
+    const [workouts, setWorkouts] = useState<IWorkout[]>([])
     const [exercises, setExercises] = useState<Exercise[]>([])
     const [title, setTitle] = useState<string>("")
     const [date, setDate] = useState<string>(getToday())
@@ -24,23 +24,16 @@ export default function ClientById() {
 
     const fetchWorkouts = async () => {
         const profileId = user?.clientProfile?.id;
-        console.log("Пытаюсь отправить запрос с ID:", profileId);
 
         if (!profileId) return;
 
         try {
             const response = await getWorkouts(profileId);
-            console.log("Успешный ответ от getWorkouts:", response);
             if (response.success) {
                 setWorkouts(response.data); 
             }
         } catch(err: any) {
-            // ОЧЕНЬ ВАЖНО: посмотри, что здесь выведется
-            console.error("КРИТИЧЕСКАЯ ОШИБКА В ЗАПРОСЕ:", err);
-            if (err.response) {
-                console.error("Данные ошибки:", err.response.data);
-                console.error("Статус ошибки:", err.response.status);
-            }
+           console.error("Ошибка при получении тренировок", err);
         }
     }
 
@@ -86,13 +79,8 @@ export default function ClientById() {
         fetchWorkouts()
     }, [])
 
-    useEffect(() => {
-        console.log("--- ЭФФЕКТ ЗАПУЩЕН ---");
-        console.log("User:", user);
-        console.log("User Profile ID:", user?.clientProfile?.id);
-        
+    useEffect(() => {        
         if (user && user.clientProfile?.id) {
-            console.log("Условия выполнены! Сейчас вызову fetchWorkouts...");
             fetchWorkouts();
         } else {
             console.log("Условия НЕ выполнены (нет user или нет id).");
@@ -130,7 +118,7 @@ export default function ClientById() {
                                             <span className="mx-1.5 text-[#00f0af]">{sub.title}</span>
                                             · {sub.remainingLesson}/{sub.totalLessons}
                                         </span>
-                                        // : `Абонемент: ${sub.title} · ${sub.totalLessons}/${sub.remainingLesson}`;
+
                                 })()
                                 : "Нет активного абонемента"
                         }

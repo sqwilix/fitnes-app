@@ -47,3 +47,12 @@ export interface IClientProfile {
         }[]
     }
 }
+
+export interface IWorkout {
+    clientId: string,
+    date: string,
+    id: string,
+    isCompleted: boolean,
+    title: string,
+    trainerId: string
+}
